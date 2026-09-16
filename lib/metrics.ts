@@ -55,7 +55,7 @@ export async function sendToMetrics(lead: Lead) {
       utm_campaign: lead.utmCampaign,
       ref: lead.referrer,
       status: "Lead In",
-      notes: "Lead captado no formulário do ebook Bioma 2.",
+      notes: "Lead captado no formulário do ebook Equipe e Consistência.",
     }),
     cache: "no-store",
     signal: AbortSignal.timeout(10000),

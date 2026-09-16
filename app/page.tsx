@@ -10,39 +10,36 @@ export default function Home() {
         <div className="brand-panel-inner">
           <header className="brand-header">
             <Image src="/escalamed-logo-dark.png" alt="EscalaMed" width={675} height={120} priority className="brand-logo" />
-            <span className="edition-label">MATERIAL DIGITAL <span>•</span> BIOMA 2</span>
+            <span className="edition-label">EBOOK PRÁTICO <span>•</span> PARA MÉDICOS</span>
           </header>
 
           <div className="brand-message">
-            <div className="eyebrow"><span /> CONTEÚDO ESCALAMED</div>
-            <h1>SEU PRÓXIMO<br /><em>PASSO</em> COMEÇA<br />AQUI<span className="gold-dot">.</span></h1>
-            <p>Preencha seus dados para acessar o ebook da campanha Bioma 2. É simples e leva menos de um minuto.</p>
+            <div className="eyebrow"><span /> JORNADA DE APRENDIZADOS PARA A CLASSE MÉDICA</div>
+            <h1>EQUIPE E<br /><em>CONSISTÊNCIA</em><span className="gold-dot">.</span></h1>
+            <p className="brand-lead">O cuidado precisa se repetir com qualidade.</p>
+            <p className="brand-copy">Uma prática médica sustentável exige estratégia e conexão. Descubra como ouvir sua equipe, criar processos claros, treinar na prática e delegar com segurança.</p>
           </div>
 
-          <div className="book-stage" aria-hidden="true">
-            <div className="book-shadow" />
-            <div className="book-back" />
-            <div className="book-cover">
-              <div className="book-cover-grid" />
-              <span className="book-kicker">ESCALAMED / EBOOK</span>
-              <span className="book-title">BIOMA<br />2<span>.</span></span>
-              <span className="book-rule" />
-              <span className="book-bottom">MATERIAL DIGITAL</span>
-              <span className="book-arrow">↗</span>
-            </div>
-            <span className="book-orbit book-orbit-one" />
-            <span className="book-orbit book-orbit-two" />
+          <div className="book-stage">
+            <Image
+              src="/ebook-capa.png"
+              alt="Capa do ebook Equipe e Consistência da EscalaMed"
+              width={1055}
+              height={1491}
+              priority
+              className="book-cover-image"
+            />
           </div>
 
-          <footer className="brand-footer"><span className="footer-rule" /> ESTRATÉGIA. GESTÃO. CRESCIMENTO.</footer>
+          <footer className="brand-footer"><span className="footer-rule" /> CRESCIMENTO COM PROCESSO, CONSISTÊNCIA E EXPERIÊNCIA.</footer>
         </div>
       </div>
 
-      <section className="form-panel" aria-label="Cadastro para acesso ao ebook">
+      <section className="form-panel" aria-label="Cadastro para baixar o ebook Equipe e Consistência">
         <div className="form-panel-inner">
-          <div className="form-topline"><span className="step-index">01 / 01</span><span className="step-caption">ACESSO AO EBOOK</span></div>
+          <div className="form-topline"><span className="step-index">EBOOK GRATUITO</span><span className="step-caption">ACESSO IMEDIATO</span></div>
           <LeadForm />
-          <p className="data-footnote">Seus dados são enviados à EscalaMed para registrar seu interesse no material. <a href="https://metrics.x5med.com.br/politica-de-privacidade" target="_blank" rel="noopener noreferrer">Política de privacidade ↗</a></p>
+          <p className="data-footnote">Seus dados são enviados à EscalaMed para registrar seu acesso ao ebook. <a href="https://metrics.x5med.com.br/politica-de-privacidade" target="_blank" rel="noopener noreferrer">Política de privacidade ↗</a></p>
         </div>
       </section>
     </main>

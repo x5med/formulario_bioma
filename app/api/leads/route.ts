@@ -19,9 +19,9 @@ export async function POST(request: Request) {
     name: text(body.name, 180),
     email: text(body.email, 240).toLowerCase(),
     phone: text(body.phone, 40).replace(/\D/g, ""),
-    utmSource: text(body.utmSource, 120) || "ebook_bioma_2",
+    utmSource: text(body.utmSource, 120) || "ebook_equipe_consistencia",
     utmMedium: text(body.utmMedium, 120) || "site",
-    utmCampaign: text(body.utmCampaign, 160) || "ebook_bioma_2",
+    utmCampaign: text(body.utmCampaign, 160) || "ebook_equipe_consistencia",
     referrer: text(body.referrer, 500),
   };
   if (lead.name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email) || lead.phone.length < 10 || lead.phone.length > 13) {

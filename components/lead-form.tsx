@@ -8,9 +8,9 @@ type LeadData = { name: string; email: string; phone: string; website: string; u
 function getAttribution() {
   const params = new URLSearchParams(window.location.search);
   return {
-    utmSource: params.get("utm_source") || "ebook_bioma_2",
+    utmSource: params.get("utm_source") || "ebook_equipe_consistencia",
     utmMedium: params.get("utm_medium") || "site",
-    utmCampaign: params.get("utm_campaign") || "ebook_bioma_2",
+    utmCampaign: params.get("utm_campaign") || "ebook_equipe_consistencia",
     referrer: document.referrer || window.location.href,
   };
 }
@@ -56,11 +56,11 @@ export function LeadForm() {
     return (
       <div className="success-panel" aria-live="polite">
         <div className="success-icon" aria-hidden="true">✓</div>
-        <p className="section-kicker">PRÓXIMA ETAPA</p>
-        <h2>Pronto, {name.trim().split(/\s+/)[0]}<span>.</span></h2>
-        <p className="success-copy">Seu material está pronto para acesso.</p>
-        <a className="primary-button download-button" href="/api/ebook" target="_blank" rel="noopener noreferrer">
-          <span>BAIXAR EBOOK</span><span className="button-arrow" aria-hidden="true">↗</span>
+        <p className="section-kicker">EBOOK LIBERADO</p>
+        <h2>Seu ebook está pronto, {name.trim().split(/\s+/)[0]}<span>.</span></h2>
+        <p className="success-copy">Comece pelo diagnóstico da sua clínica e avance para processos, treinamento e autonomia com padrão.</p>
+        <a className="primary-button download-button" href="/ebook-equipe-e-consistencia.pdf" download="ebook-equipe-e-consistencia-escalamed.pdf">
+          <span>BAIXAR EBOOK GRATUITO</span><span className="button-arrow" aria-hidden="true">↓</span>
         </a>
         <div className={`sync-status sync-${syncState}`} role="status">
           {syncState === "sending" && <><span className="status-spinner" /> Finalizando seu cadastro em segundo plano…</>}
@@ -73,9 +73,9 @@ export function LeadForm() {
 
   return (
     <form className="lead-form" onSubmit={submit}>
-      <p className="section-kicker">O MATERIAL É SEU</p>
-      <h2>Preencha e<br /><strong>acesse o ebook<span>.</span></strong></h2>
-      <p className="form-intro">Informe seus dados para avançar. Você poderá baixar o material sem esperar a finalização do cadastro.</p>
+      <p className="section-kicker">EQUIPE E CONSISTÊNCIA</p>
+      <h2>Uma equipe que entrega qualidade <strong>sem depender do improviso<span>.</span></strong></h2>
+      <p className="form-intro">Baixe o guia prático para identificar gargalos, ouvir sua equipe, criar padrões e delegar com segurança. Preencha seus dados e acesse agora.</p>
 
       <div className="fields">
         <label className="field"><span>Nome completo <b>*</b></span><input type="text" name="name" autoComplete="name" placeholder="Seu nome" minLength={2} maxLength={180} required value={name} onChange={event => setName(event.target.value)} /></label>
@@ -83,8 +83,8 @@ export function LeadForm() {
         <label className="field"><span>WhatsApp <b>*</b></span><input type="tel" name="phone" autoComplete="tel" inputMode="tel" placeholder="(11) 99999-9999" minLength={10} maxLength={25} required value={phone} onChange={event => setPhone(event.target.value)} /><small>Com DDD. Usaremos o número para identificar seu cadastro.</small></label>
       </div>
       <label className="honeypot" aria-hidden="true">Website<input type="text" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={event => setWebsite(event.target.value)} /></label>
-      <button className="primary-button" type="submit"><span>CONTINUAR PARA O EBOOK</span><span className="button-arrow" aria-hidden="true">↗</span></button>
-      <div className="form-below"><span className="gold-mini-arrow">↗</span><span>ACESSO IMEDIATO APÓS O CADASTRO</span></div>
+      <button className="primary-button" type="submit"><span>QUERO BAIXAR O EBOOK</span><span className="button-arrow" aria-hidden="true">↗</span></button>
+      <div className="form-below"><span className="gold-mini-arrow">↗</span><span>DOWNLOAD GRATUITO E IMEDIATO</span></div>
     </form>
   );
 }

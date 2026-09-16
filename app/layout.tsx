@@ -6,8 +6,8 @@ const sora = Sora({ subsets: ["latin"], variable: "--font-sora", display: "swap"
 const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Ebook Bioma 2 | EscalaMed",
-  description: "Cadastre-se para acessar o ebook Bioma 2 da EscalaMed.",
+  title: "Ebook Equipe e Consistência | EscalaMed",
+  description: "Baixe o ebook gratuito da EscalaMed sobre processos, treinamento e delegação para construir uma equipe que entrega qualidade com consistência.",
   robots: { index: false, follow: false },
 };
 

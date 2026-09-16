@@ -1,6 +1,6 @@
-# Formulário do ebook Bioma 2
+# Ebook Equipe e Consistência
 
-Landing page da EscalaMed para captar nome, e-mail e WhatsApp. Após o envio, a pessoa avança imediatamente para a tela do material; o cadastro é enviado em segundo plano ao funil **Bioma 2** no Metrics.
+Landing page da EscalaMed para disponibilizar o ebook **Equipe e Consistência**. Após informar nome, e-mail e WhatsApp, a pessoa recebe o download imediatamente; o cadastro é enviado em segundo plano ao funil interno **Bioma 2** no Metrics.
 
 ## Rodar localmente
 
@@ -10,11 +10,11 @@ copy .env.example .env.local
 npm run dev
 ```
 
-Configure `METRICS_API_KEY` em `.env.local` com a mesma chave `ENDOMAX_API_KEY` usada pelo Metrics. Ela fica somente no servidor. A integração busca o funil pelo nome exato `Bioma 2` e usa a API existente do Metrics. `METRICS_BIOMA_FUNNEL_ID` é opcional.
+Configure `METRICS_API_KEY` em `.env.local` com a mesma chave `ENDOMAX_API_KEY` usada pelo Metrics. Ela fica somente no servidor. Configure a mesma variável no projeto da Vercel. A integração busca o funil pelo nome exato `Bioma 2` e usa a API existente do Metrics. `METRICS_BIOMA_FUNNEL_ID` é opcional.
 
 ## Arquivo do ebook
 
-O botão **Baixar ebook** aponta para `/api/ebook`. Coloque o PDF em `public/ebook-bioma.pdf` ou configure `EBOOK_URL` com uma URL HTTPS do arquivo. A rota entrega o PDF como anexo ou redireciona para a URL configurada. Sem o arquivo ou a URL, responde `503`; o ebook precisa ser adicionado antes de publicar a página para visitantes.
+O ebook final está em `public/ebook-equipe-e-consistencia.pdf`, com as dez imagens originais na ordem de `ebook1.png` a `ebook10.png`, uma por página. O botão de download aponta diretamente para esse arquivo estático, servido pela Vercel. A capa exibida na página é `public/ebook-capa.png`.
 
 ## Comportamento
 
