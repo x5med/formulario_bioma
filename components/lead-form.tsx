@@ -84,7 +84,6 @@ export function LeadForm() {
       </div>
       <label className="honeypot" aria-hidden="true">Website<input type="text" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={event => setWebsite(event.target.value)} /></label>
       <button className="primary-button" type="submit"><span>QUERO BAIXAR O EBOOK</span><span className="button-arrow" aria-hidden="true">↗</span></button>
-      <div className="form-below"><span className="gold-mini-arrow">↗</span><span>DOWNLOAD GRATUITO E IMEDIATO</span></div>
     </form>
   );
 }
