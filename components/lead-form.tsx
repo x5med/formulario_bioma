@@ -64,7 +64,7 @@ export function LeadForm() {
         </a>
         <div className={`sync-status sync-${syncState}`} role="status">
           {syncState === "sending" && <><span className="status-spinner" /> Finalizando seu cadastro em segundo plano…</>}
-          {syncState === "sent" && <><span className="status-check">✓</span> Cadastro confirmado.</>}
+          {syncState === "sent" && <><span className="status-check">✓</span> Dados salvos.</>}
           {syncState === "failed" && <><span className="status-warning">!</span> Não foi possível registrar seus dados. <button type="button" onClick={() => pending && void sendLead(pending)}>Tentar novamente</button></>}
         </div>
       </div>
