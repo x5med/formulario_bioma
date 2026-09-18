@@ -78,9 +78,9 @@ export function LeadForm() {
       <p className="form-intro">Baixe o guia prático para identificar gargalos, ouvir sua equipe, criar padrões e delegar com segurança. Preencha seus dados e acesse agora.</p>
 
       <div className="fields">
-        <label className="field"><span>Nome completo <b>*</b></span><input type="text" name="name" autoComplete="name" placeholder="Seu nome" minLength={2} maxLength={180} required value={name} onChange={event => setName(event.target.value)} /></label>
-        <label className="field"><span>E-mail <b>*</b></span><input type="email" name="email" autoComplete="email" placeholder="voce@exemplo.com" maxLength={240} required value={email} onChange={event => setEmail(event.target.value)} /></label>
-        <label className="field"><span>WhatsApp <b>*</b></span><input type="tel" name="phone" autoComplete="tel" inputMode="tel" placeholder="(11) 99999-9999" minLength={10} maxLength={25} required value={phone} onChange={event => setPhone(event.target.value)} /><small>Com DDD. Usaremos o número para identificar seu cadastro.</small></label>
+        <label className="field"><span>Nome completo <span className="required-mark" aria-hidden="true">*</span></span><input type="text" name="name" autoComplete="name" placeholder="Como podemos chamar você?" minLength={2} maxLength={180} required value={name} onChange={event => setName(event.target.value)} /></label>
+        <label className="field"><span>E-mail <span className="required-mark" aria-hidden="true">*</span></span><input type="email" name="email" autoComplete="email" placeholder="voce@exemplo.com" maxLength={240} required value={email} onChange={event => setEmail(event.target.value)} /></label>
+        <label className="field"><span>WhatsApp <span className="required-mark" aria-hidden="true">*</span></span><input type="tel" name="phone" autoComplete="tel" inputMode="tel" placeholder="(11) 99999-9999" minLength={10} maxLength={25} required value={phone} onChange={event => setPhone(event.target.value)} /><small>Com DDD. Usaremos o número para identificar seu cadastro.</small></label>
       </div>
       <label className="honeypot" aria-hidden="true">Website<input type="text" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={event => setWebsite(event.target.value)} /></label>
       <button className="primary-button" type="submit"><span>QUERO BAIXAR O EBOOK</span><span className="button-arrow" aria-hidden="true">↗</span></button>
