@@ -1,3 +1,5 @@
+import { EBOOK_DELIVERY_REQUEST_TEXT, EBOOK_WHATSAPP_CONSENT_TEXT } from "@/lib/consent";
+
 const METRICS_BASE_URL = process.env.METRICS_BASE_URL || "https://metrics.x5med.com.br";
 const FUNNEL_NAME = "Bioma 2";
 let cachedFunnel: { id: string; until: number } | null = null;
@@ -10,6 +12,9 @@ type Lead = {
   utmMedium: string;
   utmCampaign: string;
   referrer: string;
+  pageUrl: string;
+  formSubmissionId: string;
+  whatsappConsent: boolean;
 };
 
 function metricsKey() {
@@ -56,12 +61,22 @@ export async function sendToMetrics(lead: Lead) {
       ref: lead.referrer,
       status: "Lead In",
       notes: "Lead captado no formulário do ebook Equipe e Consistência.",
+      page_url: lead.pageUrl,
+      form_submission_id: lead.formSubmissionId,
+      whatsapp_consent: lead.whatsappConsent,
+      consent_text: EBOOK_WHATSAPP_CONSENT_TEXT,
+      ebook_delivery_requested: true,
+      ebook_delivery_text: EBOOK_DELIVERY_REQUEST_TEXT,
+      ebook_source: "ebook_equipe_consistencia",
     }),
     cache: "no-store",
-    signal: AbortSignal.timeout(10000),
+    signal: AbortSignal.timeout(35000),
   });
   if (!response.ok) throw new Error(`Cadastro no Metrics falhou (${response.status}).`);
-  const result = await response.json() as { ok?: boolean; lead?: { id?: string } };
+  const result = await response.json() as { ok?: boolean; lead?: { id?: string }; ebook_delivery?: string };
   if (!result.ok || !result.lead?.id) throw new Error("Metrics não confirmou o cadastro.");
-  return result.lead.id;
+  const delivery = ["sent", "already_sent", "pending", "opted_out", "failed"].includes(result.ebook_delivery || "")
+    ? result.ebook_delivery
+    : undefined;
+  return { leadId: result.lead.id, delivery };
 }

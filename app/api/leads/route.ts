@@ -23,14 +23,17 @@ export async function POST(request: Request) {
     utmMedium: text(body.utmMedium, 120) || "site",
     utmCampaign: text(body.utmCampaign, 160) || "ebook_equipe_consistencia",
     referrer: text(body.referrer, 500),
+    pageUrl: text(body.pageUrl, 500),
+    formSubmissionId: text(body.formSubmissionId, 36),
+    whatsappConsent: body.whatsappConsent === true,
   };
-  if (lead.name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email) || lead.phone.length < 10 || lead.phone.length > 13) {
+  if (lead.name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email) || lead.phone.length < 10 || lead.phone.length > 13 || typeof body.whatsappConsent !== "boolean" || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(lead.formSubmissionId) || !/^https?:\/\//i.test(lead.pageUrl)) {
     return NextResponse.json({ error: "Revise nome, e-mail e WhatsApp." }, { status: 400 });
   }
 
   try {
-    await sendToMetrics(lead);
-    return NextResponse.json({ ok: true }, { status: 201 });
+    const result = await sendToMetrics(lead);
+    return NextResponse.json({ ok: true, delivery: result.delivery }, { status: 201 });
   } catch (error) {
     console.error("[Bioma ebook] Falha de sincronização:", error instanceof Error ? error.message : error);
     return NextResponse.json({ error: "Não foi possível registrar o cadastro." }, { status: 502 });

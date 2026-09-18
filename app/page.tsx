@@ -35,11 +35,11 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="form-panel" aria-label="Cadastro para baixar o ebook Equipe e Consistência">
+      <section className="form-panel" aria-label="Cadastro para receber o ebook Equipe e Consistência pelo WhatsApp">
         <div className="form-panel-inner">
-          <div className="form-topline"><span className="step-index">EBOOK GRATUITO</span><span className="step-caption">ACESSO IMEDIATO</span></div>
+          <div className="form-topline"><span className="step-index">EBOOK GRATUITO</span><span className="step-caption">ENTREGA PELO WHATSAPP</span></div>
           <LeadForm />
-          <p className="data-footnote">Seus dados são enviados à EscalaMed para registrar seu acesso ao ebook. <a href="https://metrics.x5med.com.br/politica-de-privacidade" target="_blank" rel="noopener noreferrer">Política de privacidade ↗</a></p>
+          <p className="data-footnote">Seus dados são enviados à EscalaMed para registrar o pedido do ebook. A opção de receber comunicações de marketing é livre. <a href="https://metrics.x5med.com.br/politica-de-privacidade" target="_blank" rel="noopener noreferrer">Política de Privacidade ↗</a></p>
         </div>
       </section>
     </main>

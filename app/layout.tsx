@@ -7,7 +7,7 @@ const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton
 
 export const metadata: Metadata = {
   title: "Ebook Equipe e Consistência | EscalaMed",
-  description: "Baixe o ebook gratuito da EscalaMed sobre processos, treinamento e delegação para construir uma equipe que entrega qualidade com consistência.",
+  description: "Receba pelo WhatsApp o ebook gratuito da EscalaMed sobre processos, treinamento e delegação para construir uma equipe que entrega qualidade com consistência.",
   robots: { index: false, follow: false },
 };
 
