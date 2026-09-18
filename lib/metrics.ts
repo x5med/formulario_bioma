@@ -73,10 +73,7 @@ export async function sendToMetrics(lead: Lead) {
     signal: AbortSignal.timeout(35000),
   });
   if (!response.ok) throw new Error(`Cadastro no Metrics falhou (${response.status}).`);
-  const result = await response.json() as { ok?: boolean; lead?: { id?: string }; ebook_delivery?: string };
+  const result = await response.json() as { ok?: boolean; lead?: { id?: string } };
   if (!result.ok || !result.lead?.id) throw new Error("Metrics não confirmou o cadastro.");
-  const delivery = ["sent", "already_sent", "pending", "opted_out", "failed"].includes(result.ebook_delivery || "")
-    ? result.ebook_delivery
-    : undefined;
-  return { leadId: result.lead.id, delivery };
+  return { leadId: result.lead.id };
 }

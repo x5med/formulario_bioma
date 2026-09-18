@@ -32,8 +32,8 @@ export async function POST(request: Request) {
   }
 
   try {
-    const result = await sendToMetrics(lead);
-    return NextResponse.json({ ok: true, delivery: result.delivery }, { status: 201 });
+    await sendToMetrics(lead);
+    return NextResponse.json({ ok: true }, { status: 201 });
   } catch (error) {
     console.error("[Bioma ebook] Falha de sincronização:", error instanceof Error ? error.message : error);
     return NextResponse.json({ error: "Não foi possível registrar o cadastro." }, { status: 502 });

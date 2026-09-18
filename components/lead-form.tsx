@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { EBOOK_DELIVERY_REQUEST_TEXT, EBOOK_WHATSAPP_CONSENT_TEXT } from "@/lib/consent";
 
-type SyncState = "idle" | "sending" | "sent" | "already_sent" | "pending" | "opted_out" | "failed" | "registration_failed";
+type SyncState = "idle" | "sending" | "registered" | "registration_failed";
 type LeadData = { name: string; email: string; phone: string; website: string; utmSource: string; utmMedium: string; utmCampaign: string; referrer: string; pageUrl: string; formSubmissionId: string; whatsappConsent: boolean };
 
 function getAttribution() {
@@ -37,10 +37,8 @@ export function LeadForm() {
         cache: "no-store",
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const result = await response.json() as { delivery?: SyncState };
-      const delivery = result.delivery || "pending";
-      setSyncState(delivery);
-      if (delivery === "sent" || delivery === "already_sent" || delivery === "opted_out") setPending(null);
+      setSyncState("registered");
+      setPending(null);
     } catch {
       setSyncState("registration_failed");
     }
@@ -57,20 +55,16 @@ export function LeadForm() {
   }
 
   if (submitted) {
-    const deliveryUnavailable = syncState === "opted_out" || syncState === "failed" || syncState === "registration_failed";
+    const registrationFailed = syncState === "registration_failed";
     return (
       <div className="success-panel" aria-live="polite">
         <div className="success-icon" aria-hidden="true">✓</div>
         <p className="section-kicker">PEDIDO RECEBIDO</p>
-        <h2>{deliveryUnavailable ? "Seu pedido precisa de atenção" : "O ebook vai chegar no seu WhatsApp"}, {name.trim().split(/\s+/)[0]}<span>.</span></h2>
-        <p className="success-copy">{deliveryUnavailable ? "Confira abaixo o estado do seu pedido." : <>Enviaremos <strong>Equipe e Consistência</strong> para o número informado. Confira suas conversas no WhatsApp.</>}</p>
+        <h2>{registrationFailed ? "Seu pedido precisa de atenção" : "Pedido recebido"}, {name.trim().split(/\s+/)[0]}<span>.</span></h2>
+        <p className="success-copy">{registrationFailed ? "Confira abaixo o estado do seu pedido." : <>Nossa equipe comercial entrará em contato pelo WhatsApp informado para encaminhar o ebook <strong>Equipe e Consistência</strong>.</>}</p>
         <div className={`sync-status sync-${syncState}`} role="status">
           {syncState === "sending" && <><span className="status-spinner" /> Registrando seu pedido…</>}
-          {syncState === "sent" && <><span className="status-check">✓</span> Envio iniciado para o WhatsApp informado.</>}
-          {syncState === "already_sent" && <><span className="status-check">✓</span> Este ebook já foi enviado antes para este número.</>}
-          {syncState === "pending" && <><span className="status-spinner" /> Pedido registrado. O envio está em processamento.</>}
-          {syncState === "opted_out" && <><span className="status-warning">!</span> Este número tem um bloqueio de mensagens. O ebook não foi enviado; fale com nossa equipe para revisar a autorização.</>}
-          {syncState === "failed" && <><span className="status-warning">!</span> Cadastro registrado, mas não conseguimos confirmar o envio. <button type="button" onClick={() => pending && void sendLead(pending)}>Tentar novamente</button></>}
+          {syncState === "registered" && <><span className="status-check">✓</span> Cadastro registrado. Aguarde o contato da nossa equipe.</>}
           {syncState === "registration_failed" && <><span className="status-warning">!</span> Não foi possível registrar o pedido. <button type="button" onClick={() => pending && void sendLead(pending)}>Tentar novamente</button></>}
         </div>
       </div>
@@ -86,14 +80,14 @@ export function LeadForm() {
       <div className="fields">
         <label className="field"><span>Nome completo <span className="required-mark" aria-hidden="true">*</span></span><input type="text" name="name" autoComplete="name" placeholder="Como podemos chamar você?" minLength={2} maxLength={180} required value={name} onChange={event => setName(event.target.value)} /></label>
         <label className="field"><span>E-mail <span className="required-mark" aria-hidden="true">*</span></span><input type="email" name="email" autoComplete="email" placeholder="voce@exemplo.com" maxLength={240} required value={email} onChange={event => setEmail(event.target.value)} /></label>
-        <label className="field"><span>WhatsApp <span className="required-mark" aria-hidden="true">*</span></span><input type="tel" name="phone" autoComplete="tel" inputMode="tel" placeholder="(11) 99999-9999" minLength={10} maxLength={25} required value={phone} onChange={event => setPhone(event.target.value)} /><small>Com DDD. O ebook será enviado para este número.</small></label>
+        <label className="field"><span>WhatsApp <span className="required-mark" aria-hidden="true">*</span></span><input type="tel" name="phone" autoComplete="tel" inputMode="tel" placeholder="(11) 99999-9999" minLength={10} maxLength={25} required value={phone} onChange={event => setPhone(event.target.value)} /><small>Com DDD. Nossa equipe entrará em contato por este número.</small></label>
       </div>
       <div className="consent-block">
         <input id="whatsapp-consent" name="whatsappConsent" type="checkbox" checked={whatsappConsent} onChange={event => setWhatsappConsent(event.target.checked)} />
         <div><label htmlFor="whatsapp-consent">{EBOOK_WHATSAPP_CONSENT_TEXT}</label><a href="https://metrics.x5med.com.br/politica-de-privacidade" target="_blank" rel="noopener noreferrer">Política de Privacidade ↗</a></div>
       </div>
       <label className="honeypot" aria-hidden="true">Website<input type="text" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={event => setWebsite(event.target.value)} /></label>
-      <button className="primary-button" type="submit"><span>RECEBER EBOOK NO WHATSAPP</span><span className="button-arrow" aria-hidden="true">↗</span></button>
+      <button className="primary-button" type="submit"><span>SOLICITAR EBOOK NO WHATSAPP</span><span className="button-arrow" aria-hidden="true">↗</span></button>
       <p className="delivery-note">{EBOOK_DELIVERY_REQUEST_TEXT}</p>
     </form>
   );
